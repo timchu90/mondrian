@@ -3,7 +3,7 @@ version 1.0
 task GetSampleId{
     input{
         File input_bam
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
 

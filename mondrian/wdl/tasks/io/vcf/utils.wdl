@@ -8,7 +8,7 @@ task vcf_reheader_id{
         File tumour_bam
         String vcf_tumour_id
         String vcf_normal_id
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         variant_utils vcf_reheader_id \

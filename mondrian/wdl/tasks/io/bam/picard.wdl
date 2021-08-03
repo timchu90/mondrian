@@ -4,7 +4,7 @@ version 1.0
 task MarkDuplicates{
     input{
         File input_bam
-        String singularity_dir
+        String? singularity_dir
     }
     command{
         picard -Xmx12G -Xms12G MarkDuplicates \
@@ -37,7 +37,7 @@ task CollectGcBiasMetrics{
         File input_bam
         File reference
         File reference_fai
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         picard -Xmx12G -Xms12G CollectGcBiasMetrics \
@@ -68,7 +68,7 @@ task CollectWgsMetrics{
         File input_bam
         File reference
         File reference_fai
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         picard -Xmx12G -Xms12G CollectWgsMetrics \
@@ -99,7 +99,7 @@ task CollectWgsMetrics{
 task CollectInsertSizeMetrics{
     input{
         File input_bam
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         picard -Xmx12G -Xms12G CollectInsertSizeMetrics \
@@ -128,7 +128,7 @@ task CollectInsertSizeMetrics{
 task SortSam{
     input{
         File input_bam
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         picard -Xmx12G -Xms12G SortSam \
@@ -155,7 +155,7 @@ task SortSam{
 task MergeSamFiles{
     input{
         Array[File] input_bams
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         picard -Xmx12G -Xms12G MergeSamFiles \

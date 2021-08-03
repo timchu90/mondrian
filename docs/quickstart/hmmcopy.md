@@ -23,6 +23,7 @@ replace `<path to refdir>` with the reference dir we downloaded in the beginning
 
 ```
 {
+"HmmcopyWorkflow.singularity_dir": "<insert path to singularity dir>",
 "HmmcopyWorkflow.bam": "hmmcopy_testdata/merged.bam",
 "HmmcopyWorkflow.bai": "hmmcopy_testdata//merged.bam.bai",
 "HmmcopyWorkflow.ref_dir": "<insert ref dir path>",
@@ -31,6 +32,8 @@ replace `<path to refdir>` with the reference dir we downloaded in the beginning
 "HmmcopyWorkflow.alignment_metrics_yaml": "hmmcopy_testdata/alignment.csv.gz.yaml"
 }
 ```
+
+you can skip line 2 of this file if you're not using singularity 
 
 
 3. run the pipeline on test dataset

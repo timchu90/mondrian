@@ -4,7 +4,7 @@ task generateIntervals{
     input{
         File reference
         Array[String] chromosomes
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         variant_utils generate_intervals --reference ~{reference} --chromosomes ~{sep=" "  chromosomes} > intervals.txt

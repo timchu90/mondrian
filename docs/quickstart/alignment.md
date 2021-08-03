@@ -22,6 +22,7 @@ replace `<path to refdir>` with the reference dir we downloaded in the beginning
 
 ```
 {
+"AlignmentWorkflow.singularity_dir": "<insert path to singularity dir>",
 "AlignmentWorkflow.ref_dir": "<insert path to the reference dir>",
 "AlignmentWorkflow.sample_id":"SA1090",
 "AlignmentWorkflow.library_id":"A96213A",
@@ -44,6 +45,8 @@ replace `<path to refdir>` with the reference dir we downloaded in the beginning
     ]
 }
 ```
+
+you can skip line 2 of this file if you're not using singularity 
 
 4. run the pipeline on test dataset
 

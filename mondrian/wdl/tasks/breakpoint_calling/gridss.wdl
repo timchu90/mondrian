@@ -1,6 +1,6 @@
 version 1.0
 
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/main/mondrian/wdl/types/breakpoint_refdata.wdl" as refdata_struct
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/types/breakpoint_refdata.wdl" as refdata_struct
 
 task runGridss{
     input{
@@ -14,7 +14,7 @@ task runGridss{
         File reference_fa_bwt
         File reference_fa_pac
         File reference_fa_sa
-        String singularity_dir
+        String? singularity_dir
     }
     command{
         gridss.sh \

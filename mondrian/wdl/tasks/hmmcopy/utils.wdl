@@ -4,7 +4,7 @@ version 1.0
 task GetCellId{
     input{
         File infile
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         echo $(basename ~{infile} .wig) > results.out
@@ -28,7 +28,7 @@ task RunReadCounter{
         File bamfile
         File baifile
         Array[String] chromosomes
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         hmmcopy_utils readcounter --infile ~{bamfile} --outdir output -w 500000 --chromosomes ~{sep=" "chromosomes}
@@ -52,7 +52,7 @@ task CorrectReadCount{
         File gc_wig
         File map_wig
         String map_cutoff
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         hmmcopy_utils correct_readcount --infile ~{infile} --outfile output.wig \
@@ -75,7 +75,7 @@ task RunHmmcopy{
     input{
         File corrected_wig
         String cell_id
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
     hmmcopy_utils run_hmmcopy \
@@ -112,7 +112,7 @@ task PlotHmmcopy{
         File reference
         File reference_fai
         String cell_id
-        String singularity_dir
+        String? singularity_dir
 
     }
     command<<<
@@ -137,7 +137,7 @@ task addMappability{
     input{
         File infile
         File infile_yaml
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
     hmmcopy_utils add_mappability --infile ~{infile} --outfile output.csv.gz
@@ -162,7 +162,7 @@ task cellCycleClassifier{
         File hmmcopy_reads
         File hmmcopy_metrics
         File alignment_metrics
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
     cell_cycle_classifier train-classify ~{hmmcopy_reads} ~{hmmcopy_metrics} ~{alignment_metrics} output.csv.gz
@@ -195,7 +195,7 @@ task addQuality{
         File alignment_metrics
         File alignment_metrics_yaml
         File classifier_training_data
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
     hmmcopy_utils add_quality --hmmcopy_metrics ~{hmmcopy_metrics} --alignment_metrics ~{alignment_metrics} --training_data ~{classifier_training_data} --output output.csv.gz
