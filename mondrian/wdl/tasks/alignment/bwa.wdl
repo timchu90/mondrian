@@ -1,6 +1,6 @@
 version 1.0
 
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/main/mondrian/wdl/types/align_refdata.wdl" as refdata_struct
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/types/align_refdata.wdl" as refdata_struct
 
 
 task BwaMemPaired {
@@ -18,7 +18,7 @@ task BwaMemPaired {
         String lane_id
         String sample_id
         String center
-        String singularity_dir
+        String? singularity_dir
     }
     command {
         bwa mem \

@@ -7,7 +7,7 @@ task CollectMetrics{
         File flagstat
         File markdups_metrics
         String cell_id
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         alignment_utils collect_metrics \

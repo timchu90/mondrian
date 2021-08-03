@@ -8,7 +8,7 @@ task consensus{
         File gridss
         String filename_prefix
         String sample_id
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         mkdir tempdir

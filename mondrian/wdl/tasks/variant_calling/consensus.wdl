@@ -12,7 +12,7 @@ task runConsensusCalling{
         File mutect_vcf
         File mutect_vcf_tbi
         Array[String] chromosomes
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
             variant_utils consensus --museq_vcf ~{museq_vcf} \

@@ -4,7 +4,7 @@ version 1.0
 task RunFastqc{
     input{
         File fastq
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         fastqc --outdir=`pwd` ~{fastq}

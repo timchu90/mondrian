@@ -5,7 +5,7 @@ task concatVcf{
         Array[File] vcf_files
         Array[File] csi_files
         Array[File] tbi_files
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         bcftools concat -a -O z -o merged.vcf.gz ~{sep=" " vcf_files}
@@ -33,7 +33,7 @@ task mergeVcf{
         Array[File] vcf_files
         Array[File] csi_files
         Array[File] tbi_files
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         all_vcfs_string=~{sep=" " vcf_files}
@@ -67,7 +67,7 @@ task mergeVcf{
 task filterVcf{
     input{
         File vcf_file
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         bcftools view -O z -f .,PASS -o filtered.vcf.gz ~{vcf_file}
@@ -93,7 +93,7 @@ task finalizeVcf{
     input{
         File vcf_file
         String filename_prefix
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         vcf-sort ~{vcf_file} > vcf_uncompressed.vcf

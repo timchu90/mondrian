@@ -7,7 +7,7 @@ task RunVcf2Maf{
         Directory vep_ref
         String tumour_id
         String normal_id
-        String singularity_dir
+        String? singularity_dir
     }
     command<<<
         if file --mime-type ~{vcf_file} | grep -q gzip$; then

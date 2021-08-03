@@ -1,11 +1,11 @@
 version 1.0
 
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/main/mondrian/wdl/analyses/sample_level/variant_calling.wdl" as variant_calling
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/main/mondrian/wdl/tasks/io/vcf/bcftools.wdl" as bcftools
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/main/mondrian/wdl/tasks/io/csverve/csverve.wdl" as csverve
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/main/mondrian/wdl/tasks/io/utilities/bash.wdl"  as bash
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/main/mondrian/wdl/tasks/variant_calling/vcf2maf.wdl"  as vcf2maf
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/main/mondrian/wdl/types/variant_refdata.wdl" as refdata_struct
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/analyses/sample_level/variant_calling.wdl" as variant_calling
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/tasks/io/vcf/bcftools.wdl" as bcftools
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/tasks/io/csverve/csverve.wdl" as csverve
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/tasks/io/utilities/bash.wdl"  as bash
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/tasks/variant_calling/vcf2maf.wdl"  as vcf2maf
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/types/variant_refdata.wdl" as refdata_struct
 
 
 struct Sample{
@@ -24,6 +24,7 @@ workflow VariantWorkflow{
         Array[String] chromosomes
         String normal_id
         Array[Sample] samples
+        String? singularity_dir = ""
     }
 
     VariantRefdata ref = {
@@ -53,7 +54,8 @@ workflow VariantWorkflow{
                 chromosomes = chromosomes,
                 vep_ref = ref.vep,
                 tumour_id = tumour_id,
-                normal_id = normal_id
+                normal_id = normal_id,
+                singularity_dir = singularity_dir
         }
     }
 
@@ -61,10 +63,12 @@ workflow VariantWorkflow{
         input:
             vcf_files = variant_workflow.vcf_output,
             csi_files = variant_workflow.vcf_csi_output,
-            tbi_files = variant_workflow.vcf_tbi_output
+            tbi_files = variant_workflow.vcf_tbi_output,
+            singularity_dir = singularity_dir
     }
     call vcf2maf.MergeMafs as merge_mafs{
         input:
-            input_mafs = variant_workflow.maf_output
+            input_mafs = variant_workflow.maf_output,
+            singularity_dir = singularity_dir
     }
 }
