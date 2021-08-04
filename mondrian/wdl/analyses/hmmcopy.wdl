@@ -1,9 +1,9 @@
 version 1.0
 
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/tasks/io/csverve/csverve.wdl" as csverve
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/tasks/io/pdf/pdf.wdl" as pdf
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/tasks/hmmcopy/utils.wdl" as utils
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/types/hmmcopy_refdata.wdl" as refdata_struct
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/v0.0.3/mondrian/wdl/tasks/io/csverve/csverve.wdl" as csverve
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/v0.0.3/mondrian/wdl/tasks/io/pdf/pdf.wdl" as pdf
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/v0.0.3/mondrian/wdl/tasks/hmmcopy/utils.wdl" as utils
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/v0.0.3/mondrian/wdl/types/hmmcopy_refdata.wdl" as refdata_struct
 
 
 workflow HmmcopyWorkflow{
@@ -35,12 +35,6 @@ workflow HmmcopyWorkflow{
 
     scatter(wigfile in readcounter.wigs){
 
-        call utils.GetCellId as cell{
-            input:
-                infile = wigfile,
-                singularity_dir = singularity_dir
-        }
-
         call utils.CorrectReadCount as correction{
             input:
                 infile = wigfile,
@@ -53,7 +47,6 @@ workflow HmmcopyWorkflow{
         call utils.RunHmmcopy as hmmcopy{
             input:
                 corrected_wig = correction.wig,
-                cell_id = cell.cellid,
                 singularity_dir = singularity_dir
         }
 
@@ -95,7 +88,6 @@ workflow HmmcopyWorkflow{
                 params_yaml = rewrite_params.outfile_yaml,
                 metrics = rewrite_metrics.outfile,
                 metrics_yaml = rewrite_metrics.outfile_yaml,
-                cell_id = cell.cellid,
                 reference = ref.reference,
                 reference_fai = ref.reference_fai,
                 singularity_dir = singularity_dir

@@ -1,5 +1,5 @@
 version 1.0
-import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/mergebamdev/mondrian/wdl/types/breakpoint_refdata.wdl" as refdata_struct
+import "https://raw.githubusercontent.com/mondrian-scwgs/mondrian/v0.0.3/mondrian/wdl/types/breakpoint_refdata.wdl" as refdata_struct
 
 
 task runSvaba{
